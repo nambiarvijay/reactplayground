@@ -31,6 +31,15 @@
         }else{
           var navClass = 'navbar navbar-expand-lg navbar-dark bg-dark'
         }
+
+        var homeActive = 'nav-link';
+        var aboutActive ='nav-link';
+
+        if (this.props.page =='home'){
+          homeActive= 'nav-link active';
+        } else if(this.props.page =='about'){
+          aboutActive='nav-link active';
+        }
         return(
           <div>
               <nav className={navClass}>
@@ -41,11 +50,11 @@
 
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                  <li className="nav-item active">
-                    <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                  <li className="nav-item">
+                    <a onClick={this.props.homeClick} className={homeActive} href="#">Home <span className="sr-only">(current)</span></a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">About</a>
+                    <a onClick={this.props.aboutClick} className={aboutActive} href="#">About</a>
                   </li>
                 </ul>
                </div>
@@ -87,7 +96,19 @@
         return(
           <div className="container">
             <div className="row">
-               Main Content
+               Home
+            </div>
+          </div>
+        )
+      }
+    });
+    //About Component
+    var PageAbout = React.createClass({
+      render: function(){
+        return(
+          <div className="container">
+            <div className="row">
+               <h2 className="page-header">About Us </h2>
             </div>
           </div>
         )
@@ -115,12 +136,38 @@
   });
     //Main Application
     var App = React.createClass({
+      getInitialState:function(){
+        return {
+          page:'home'
+        }
+      },
+      handleHomeClick:function(){
+        this.setState({
+          page: 'home'
+        })
+      },
+      handleAboutClick:function(){
+        this.setState({
+          page: 'about'
+        })
+      },
       render: function(){
+        if(this.state.page =='home'){
+          var jumbotron = <Jumbotron />
+          var page = <PageHome />
+        }else if (this.state.page == 'about'){
+            var jumbotron='';
+            var page = <PageAbout />
+        }
         return(
           <div>
-            <Navbar color="dark"/>
-            <Jumbotron />
-            <PageHome />
+            <Navbar
+                color="dark"
+                page={this.state.page}
+                homeClick={this.handleHomeClick}
+                aboutClick= {this.handleAboutClick}/>
+            {jumbotron}
+            {page}
             <Footer />
           </div>
         )
