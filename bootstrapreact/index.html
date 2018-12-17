@@ -3,7 +3,7 @@
   <title>Welcome</title>
   <script src="js/react.js"></script>
   <script src="js/react-dom.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js"></script>
 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/style.css">
@@ -11,48 +11,93 @@
 </head>
 <body>
   <div id="app"></div>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Vijay Website</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-    </ul>
-   </div>
-</nav>
 
-   <main role="main">
+  <script type="text/babel">
+    //NavBar Component
+    var Navbar = React.createClass({
+      render:function(){
+        return(
+          <div>
+              <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+              <a className="navbar-brand" href="#">Vijay Website</a>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
 
-     <div class="jumbotron">
-       <div class="container">
-         <h1 class="display-3">Hello, world!</h1>
-         <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-       </div>
-     </div>
+              <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
+                  <li className="nav-item active">
+                    <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">About</a>
+                  </li>
+                </ul>
+               </div>
+            </nav>
+          </div>
+        )
+      }
+    });
+    //Jumbotron Component
+    var Jumbotron = React.createClass({
+      render: function(){
+        return(
+          <div className="jumbotron">
+            <div className="container">
+              <h1 className="display-3">Hello, world!</h1>
+              <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+              <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+            </div>
+          </div>
+        )
+      }
+    });
 
-     <div class="container">
-       <div class="row">
-          Main Content
-       </div>
+    //Page Component
+    var PageHome = React.createClass({
+      render: function(){
+        return(
+          <div className="container">
+            <div className="row">
+               Main Content
+            </div>
+          </div>
+        )
+      }
+    });
 
-       <hr>
-       <footer>
-         <p> &copy; 2015 nambiarvijay; </p>
-       </footer>
-     </div>
-
-   </main>
-  <script>
-
+    //Footer Component
+  var Footer = React.createClass({
+    render: function(){
+      return(
+        <div className="container">
+        <hr />
+        <footer>
+          <p> &copy; 2018 nambiarvijay.com; </p>
+        </footer>
+        </div>
+      )
+    }
+  });
+    //Main Application
+    var App = React.createClass({
+      render: function(){
+        return(
+          <div>
+            <Navbar />
+            <Jumbotron />
+            <PageHome />
+            <Footer />
+          </div>
+        )
+      }
+    });
+    ReactDOM.render(
+      <App />,
+      document.getElementById('app')
+    );
   </script>
 </body>
 </html>
